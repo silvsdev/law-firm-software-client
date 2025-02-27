@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000/api'
+  apiUrl: 'https://web-law-firm-software-api-zan-gtbuhghxd7e2b4h7.southafricanorth-01.azurewebsites.net/api'
 };
