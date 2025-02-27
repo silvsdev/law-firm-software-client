@@ -1,0 +1,49 @@
+<div
+  class="relative z-10"
+  aria-labelledby="slide-over-title"
+  role="dialog"
+  aria-modal="true"
+  id="modal"
+>
+  <!-- Background backdrop, show/hide based on slide-over state. -->
+  <div  class="fixed inset-0"></div>
+  <!-- <div *ngIf="isSlideOver" class="fixed inset-0"></div> -->
+
+  <div
+    class="fixed inset-0 overflow-hidden"
+  >
+    <div class="absolute inset-0 overflow-hidden">
+      <div
+        class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+      >
+        <div
+
+          class="pointer-events-auto w-screen max-w-md shadow-md"
+        >
+          <div class="flex h-full flex-col overflow-y-hidden pt-6">
+            <div class="px-4 sm:px-6">
+              <div class="flex items-start justify-between bg-white">
+                <h2
+                  class="text-base font-semibold leading-6 text-black"
+                  id="slide-over-title"
+                >
+                  {{panelTitle}}
+                </h2>
+              </div>
+              <div class="border-t border-gray-200 mt-4 -mx-6"></div>
+            </div>
+            <div
+              class="bg-white relative  flex-1 overflow-y-auto"
+            >
+            <!-- <ng-content select="[heading]"></ng-content> -->
+
+              <ng-content></ng-content>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

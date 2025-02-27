@@ -1,0 +1,59 @@
+<form
+  [formGroup]="userCreateForm"
+  (ngSubmit)="userCreateForm.valid && onSubmit() "
+  autocomplete="off"
+  class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
+>
+  <div class="h-0 flex-1 overflow-y-auto mt-4">
+    <div class="flex flex-1 flex-col justify-between">
+      <div class="divide-y divide-gray-200 px-4 sm:px-6 pb-8">
+        <app-text-input
+          [formControl]="$any(userCreateForm.controls['fullName'])"
+          [label]="'Full Name'"
+        ></app-text-input>
+        <app-text-input
+          [formControl]="$any(userCreateForm.controls['lastName'])"
+          [label]="'Last Name'"
+        ></app-text-input>
+        <app-text-input
+          [formControl]="$any(userCreateForm.controls['username'])"
+          [label]="'Username'"
+        ></app-text-input>
+        <app-text-input
+          [formControl]="$any(userCreateForm.controls['email'])"
+          [label]="'Email'"
+          type="email"
+        ></app-text-input>
+        <app-text-input
+          [formControl]="$any(userCreateForm.controls['password'])"
+          [label]="'Password'"
+          [type]="'password'"
+          type="password"
+        ></app-text-input>
+        <app-checkbox-input
+          [formControl]="$any(userCreateForm.controls['roles'])"
+          [label]="'Roles'"
+          [options]="this.roleOptions">
+        </app-checkbox-input>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-shrink-0 justify-end px-4 py-4">
+    <button
+
+      type="button"
+      (click)="cancel()"
+      class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+    >
+      Cancel
+    </button>
+    <button
+      [disabled]="!userCreateForm.valid"
+      class="btn btn-success me-2 disabled:opacity-50"
+      type="submit"
+      class="ml-4 inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >
+      Save
+    </button>
+  </div>
+</form>
