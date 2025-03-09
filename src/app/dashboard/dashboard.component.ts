@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   getUserName(): void {
     const currentUser = this.accountService.currentUser();
     if (currentUser) {
-      this.userName = currentUser.knownAs; // Assuming the User model has a 'name' property
+      this.userName = currentUser.username; // Assuming the User model has a 'name' property
     }
   }
 

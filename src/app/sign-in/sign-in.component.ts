@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
   login() {
     this.accountService.login(this.loginForm.value).subscribe({
       next: _ => {
-        this.router.navigateByUrl('/users')
+        this.router.navigateByUrl('/dashboard')
       },
       // error: error => this.toastr.error(error.error)
     })
