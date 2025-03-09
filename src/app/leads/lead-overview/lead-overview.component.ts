@@ -85,7 +85,7 @@ export class LeadOverviewComponent {
     doc.text(`${lead.status}`, 50, 80);
 
     doc.setFont('helvetica', 'bold');
-    doc.text(`Created Date:`, margin, 90);
+    doc.text(`Date Submitted:`, margin, 90);
     doc.setFont('helvetica', 'normal');
     doc.text(`${new Date(lead.createdDate).toLocaleDateString('en-GB')}`, 50, 90);
 
