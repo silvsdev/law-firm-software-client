@@ -8,6 +8,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { authGuard } from './_guards/auth.guard';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { DisbursementOverviewComponent } from './disbursement/disbursement-overview/disbursement-overview.component';
+import { LeadOverviewComponent } from './leads/lead-overview/lead-overview.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'users', component: UserOverviewComponent },
       { path: 'analytics', component: AnalyticsComponent },
       { path: 'disbursements', component: DisbursementOverviewComponent },
+      { path: 'leads', component: LeadOverviewComponent },
     ]
   },
   {

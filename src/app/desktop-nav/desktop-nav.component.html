@@ -4,12 +4,23 @@
   <!-- Sidebar component, swap this element with another sidebar if you like -->
   <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6">
     <div class="flex h-10 pt-4 shrink-0 items-center">
-      <!-- <img
-        class="h-5 w-auto"
-        src="https://tailwindui.com/plus/img/logos/mark.svg?color=black"
-        alt="Your Company"
-      /> -->
-      <P class=" font-semibold text-xs"> Thorrington-Smith and Silver </P>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="size-5 text-indigo-500"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z"
+          clip-rule="evenodd"
+        />
+        <path
+          d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z"
+        />
+      </svg>
+
+      <P class="font-semibold text-s pl-2"> Legal Software </P>
     </div>
     <div class="border-t border-gray-100 -mx-6"></div>
     <nav class="flex flex-1 flex-col">
@@ -42,7 +53,7 @@
                 Dashboard
               </button>
             </li>
-            <li>
+            <!-- <li>
               <button
                 [routerLink]="['/files']"
                 routerLinkActive="text-indigo-600"
@@ -66,7 +77,7 @@
                 </svg>
                 Files
               </button>
-            </li>
+            </li> -->
 
             <li>
               <!-- Current: "bg-white text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-white" -->
@@ -75,14 +86,25 @@
                 routerLinkActive="text-indigo-600"
                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-white hover:text-indigo-600 w-full"
               >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 shrink-0 text-gray-600 group-hover:text-indigo-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-5 w-5 shrink-0 text-gray-600 group-hover:text-indigo-600"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+                  />
+                </svg>
 
                 <span class="truncate">Users</span>
               </button>
             </li>
-            <li>
+            <!-- <li>
               <button
                 [routerLink]="['/disbursements']"
                 routerLinkActive="text-indigo-600"
@@ -105,10 +127,34 @@
 
                 Disbursements
               </button>
+            </li> -->
+            <li>
+              <button
+                [routerLink]="['/leads']"
+                routerLinkActive="text-indigo-600"
+                class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-white hover:text-indigo-600 w-full"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-5 w-5 shrink-0 text-gray-600 group-hover:text-indigo-600"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z"
+                  />
+                </svg>
+
+                Leads
+              </button>
             </li>
           </ul>
         </li>
-        <li>
+        <!-- <li>
           <div class="text-xs font-semibold leading-6 text-gray-600">Analytics</div>
           <ul role="list" class="-mx-2 mt-2 space-y-1">
 
@@ -138,7 +184,7 @@
               </button>
             </li>
           </ul>
-        </li>
+        </li> -->
 
         <!-- <li class="-mx-6 mt-auto">
           <button (click)="logout()" class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-white">
