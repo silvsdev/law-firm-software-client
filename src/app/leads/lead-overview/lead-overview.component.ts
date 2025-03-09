@@ -46,7 +46,7 @@ export class LeadOverviewComponent {
 
     doc.setFontSize(20);
     doc.setFont('helvetica', 'bold');
-    doc.text('Lead Details', margin, 10);
+    doc.text(`${lead.source}`+' Lead', margin, 10);
 
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
