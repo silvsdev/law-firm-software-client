@@ -52,17 +52,17 @@ export class LeadOverviewComponent {
     doc.setFont('helvetica', 'bold');
     doc.text(`Name:`, margin, 20);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${lead.name}`, 50, 20);
+    doc.text(`${lead.name}`, 80, 20);
 
     doc.setFont('helvetica', 'bold');
     doc.text(`Email:`, margin, 30);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${lead.email}`, 50, 30);
+    doc.text(`${lead.email}`, 80, 30);
 
     doc.setFont('helvetica', 'bold');
     doc.text(`Phone:`, margin, 40);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${lead.phone}`, 50, 40);
+    doc.text(`${lead.phone}`, 80, 40);
 
     doc.setFont('helvetica', 'bold');
     doc.text(`Preferred Contact Method:`, margin, 50);
@@ -70,29 +70,33 @@ export class LeadOverviewComponent {
     doc.text(`${lead.preferredContactMethod}`, 80, 50);
 
     doc.setFont('helvetica', 'bold');
-    doc.text(`Accident Date:`, margin, 60);
+    doc.text(`Preferred Language:`, margin, 60);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${lead.accidentDate}`, 50, 60);
+    doc.text(`${lead.preferredLanguage}`, 80, 60);
 
     doc.setFont('helvetica', 'bold');
-    doc.text(`Source:`, margin, 70);
+    doc.text(`Accident Date:`, margin, 70);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${lead.source}`, 50, 70);
+    doc.text(`${lead.accidentDate}`, 80, 70);
 
     doc.setFont('helvetica', 'bold');
-    doc.text(`Status:`, margin, 80);
+    doc.text(`Source:`, margin, 80);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${lead.status}`, 50, 80);
+    doc.text(`${lead.source}`, 80, 80);
 
     doc.setFont('helvetica', 'bold');
-    doc.text(`Date Submitted:`, margin, 90);
+    doc.text(`Status:`, margin, 90);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${new Date(lead.createdDate).toLocaleDateString('en-GB')}`, 50, 90);
+    doc.text(`${lead.status}`, 80, 90);
 
     doc.setFont('helvetica', 'bold');
-    doc.text('Notes:', margin, 100);
+    doc.text(`Date Submitted:`, margin, 100);
     doc.setFont('helvetica', 'normal');
-    doc.line(margin, 110, margin + lineWidth, 110);
+    doc.text(`${new Date(lead.createdDate).toLocaleDateString('en-GB')}`, 80, 100);
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Notes:', margin, 110);
+    doc.setFont('helvetica', 'normal');
     doc.line(margin, 120, margin + lineWidth, 120);
     doc.line(margin, 130, margin + lineWidth, 130);
     doc.line(margin, 140, margin + lineWidth, 140);
@@ -101,6 +105,7 @@ export class LeadOverviewComponent {
     doc.line(margin, 170, margin + lineWidth, 170);
     doc.line(margin, 180, margin + lineWidth, 180);
     doc.line(margin, 190, margin + lineWidth, 190);
+    doc.line(margin, 200, margin + lineWidth, 200);
 
     const formattedDate = new Date(lead.createdDate).toLocaleDateString('en-GB').replace(/\//g, '-');
     doc.save(`${lead.name}-${formattedDate}.pdf`);
