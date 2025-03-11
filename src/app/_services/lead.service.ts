@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Lead } from '../_models/lead.model';
+import { LeadAdd } from '../_models/LeadAdd.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,17 @@ export class LeadService {
             leads[index] = updatedLead;
             this.Leads.set([...leads]);
           }
+        }
+      }
+    });
+  }
+
+  addLead(lead: LeadAdd) {
+    return this.http.post<Lead>(`${this.baseUrl}/add-lead`, lead).subscribe({
+      next: newLead => {
+        const leads = this.Leads();
+        if (leads) {
+          this.Leads.set([...leads, newLead]);
         }
       }
     });

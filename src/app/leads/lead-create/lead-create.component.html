@@ -1,0 +1,79 @@
+<form
+  [formGroup]="leadCreateForm"
+  (ngSubmit)="leadCreateForm.valid && onSubmit()"
+  autocomplete="off"
+  class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
+>
+  <div class="h-0 flex-1 overflow-y-auto mt-4">
+    <div class="flex flex-1 flex-col justify-between">
+      <div class="divide-y divide-gray-200 px-4 sm:px-6 pb-8">
+        <!-- Name -->
+        <app-text-input
+          [formControl]="$any(leadCreateForm.controls['name'])"
+          [label]="'Name'"
+        ></app-text-input>
+
+        <!-- Email -->
+        <app-text-input
+          [formControl]="$any(leadCreateForm.controls['email'])"
+          [label]="'Email'"
+          [type]="'email'"
+        ></app-text-input>
+
+        <!-- Phone -->
+        <app-text-input
+          [formControl]="$any(leadCreateForm.controls['phone'])"
+          [label]="'Phone'"
+        ></app-text-input>
+
+        <!-- Preferred Contact Method -->
+        <app-dropdown-input
+          [formControl]="
+            $any(leadCreateForm.controls['preferredContactMethod'])
+          "
+          [label]="'Preferred Contact Method'"
+          [options]="preferredContactMethodOptions"
+        ></app-dropdown-input>
+
+        <!-- Preferred Language -->
+        <app-dropdown-input
+          [formControl]="$any(leadCreateForm.controls['preferredLanguage'])"
+          [label]="'Preferred Language'"
+          [options]="preferredLanguageOptions"
+        ></app-dropdown-input>
+
+        <!-- Accident Date -->
+        <app-text-input
+          [formControl]="$any(leadCreateForm.controls['accidentDate'])"
+          [label]="'Accident Date'"
+          [type]="'date'"
+        ></app-text-input>
+
+        <!-- Source -->
+        <app-dropdown-input
+          [formControl]="$any(leadCreateForm.controls['source'])"
+          [label]="'Source'"
+          [options]="sourceOptions"
+        ></app-dropdown-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex flex-shrink-0 justify-end px-4 py-4">
+    <button
+      type="button"
+      (click)="cancel()"
+      class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+    >
+      Cancel
+    </button>
+    <button
+      [disabled]="!leadCreateForm.valid"
+      class="ml-4 inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      type="submit"
+    >
+      Create Lead
+    </button>
+  </div>
+</form>

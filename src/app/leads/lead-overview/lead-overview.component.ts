@@ -4,11 +4,13 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Lead } from '../../_models/lead.model';
 import { FormsModule } from '@angular/forms';
 import { jsPDF } from 'jspdf';
+import { LeadCreateComponent } from "../lead-create/lead-create.component";
+import { SlideOverComponent } from "../../_shared/slide-over/slide-over.component";
 
 @Component({
   selector: 'app-lead-overview',
   standalone: true,
-  imports: [CommonModule, FormsModule, DatePipe],
+  imports: [CommonModule, FormsModule, DatePipe, LeadCreateComponent, SlideOverComponent],
   templateUrl: './lead-overview.component.html',
   styleUrl: './lead-overview.component.css'
 })
@@ -17,6 +19,9 @@ export class LeadOverviewComponent {
   statuses: string[] = ['New', 'Attorney Review', 'Qualified', 'Unqualified', 'Converted'];
   showModal = false;
   selectedLead: Lead | null = null;
+  registerMode = false;
+  editMode = false;
+  panelTitle = 'Add new user';
 
   constructor(private leadService: LeadService) {}
 
@@ -124,6 +129,17 @@ export class LeadOverviewComponent {
 
   onUpdateLead(lead: Lead): void {
     this.leadService.updateLead(lead);
+  }
+
+  addLead(){
+    this.panelTitle = 'Add new lead';
+    this.editMode = false;
+    this.registerMode = true;
+  }
+
+  cancelRegisterMode(event: boolean) {
+    this.registerMode = event;
+    this.editMode = event;
   }
 
 }

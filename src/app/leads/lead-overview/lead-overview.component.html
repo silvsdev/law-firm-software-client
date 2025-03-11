@@ -59,9 +59,10 @@
       <!-- Right side with create event button -->
       <div class="mt-4 sm:mt-0 flex justify-end">
         <button
-          [disabled]="true"
+
+        (click)="addLead()"
           type="button"
-          class="rounded-md bg-green-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+          class="rounded-md bg-green-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
         >
           Create lead
         </button>
@@ -289,3 +290,11 @@
     </div>
   </div>
 </div>
+
+
+<app-slide-over [panelTitle]="panelTitle" *ngIf="registerMode">
+  <app-lead-create
+    (cancelRegister)="cancelRegisterMode($event)">
+  </app-lead-create>
+
+</app-slide-over>
