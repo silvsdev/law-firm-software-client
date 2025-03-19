@@ -9,12 +9,12 @@ import { LegalFileParams } from '../_models/legalFileParams.model';
 import { setPaginatedResponse, setPaginationHeaders } from './paginationHelper';
 import { LegalFileUpdate } from '../_models/legalFileUpdate.model';
 import { NotificationService } from './notification.service';
+import { LegalFileForDisbursement } from '../_models/legalFileForDisbursement.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LegalFileService {
-  // legalFiles = signal<LegalFile[]>([]);
   private http = inject(HttpClient);
   private notificationService = inject(NotificationService);
 
@@ -22,6 +22,7 @@ export class LegalFileService {
   baseUrl = environment.apiUrl + 'legalFile';
   user = this.accountService.currentUser();
   paginatedResult = signal<PaginatedResult<LegalFile[]> | null>(null);
+  paginatedResultForDisbursements = signal<PaginatedResult<LegalFileForDisbursement[]> | null>(null);
   legalFileCache = new Map();
   legalFileParams =  signal<LegalFileParams>(new LegalFileParams());
 
@@ -49,6 +50,28 @@ export class LegalFileService {
         this.legalFileCache.set(Object.values(this.legalFileParams()).join('-'), response);
       }
     })
+  }
+
+  getLegalFilesForDisbursements() {
+    const response = this.legalFileCache.get(Object.values(this.legalFileParams()).join('-') + '-get-legal-files-for-disbursements');
+
+    if (response) return setPaginatedResponse(response, this.paginatedResult);
+
+    let params = setPaginationHeaders(this.legalFileParams().pageNumber, this.legalFileParams().pageSize);
+
+    params = params.append('minAge', this.legalFileParams().fileReference);
+    params = params.append('attorney', this.legalFileParams().attorney);
+    params = params.append('dateOfAccident', this.legalFileParams().dateOfAccident);
+    params = params.append('dateOfInstruction', this.legalFileParams().dateOfInstruction);
+    params = params.append('status', this.legalFileParams().status);
+    params = params.append('prescriptionDate', this.legalFileParams().prescriptionDate);
+
+    return this.http.get<LegalFileForDisbursement[]>(`${this.baseUrl}/get-legal-files-for-disbursements`, { observe: 'response', params }).subscribe({
+      next: response => {
+        setPaginatedResponse(response, this.paginatedResultForDisbursements);
+        this.legalFileCache.set(Object.values(this.legalFileParams()).join('-') + '-get-legal-files-for-disbursements', response);
+      }
+    });
   }
 
   addLegalFile(legalFile: LegalFileAdd) {

@@ -27,7 +27,7 @@
       [formControl]="$any(fileEditForm.controls['fileType'])"
       [label]="'File Type'"
       [options]="fileTypes"
-      [value]="legalFile.fileType"
+      [value]="legalFile.fileType || 'unknown'"
       >
       </app-dropdown-input>
       <app-dropdown-input
@@ -40,7 +40,7 @@
       <app-dropdown-input
         [formControl]="$any(fileEditForm.controls['status'])"
         [label]="'Status'"
-        [value]="legalFile.status"
+        [value]="legalFile.status || 'unknown'"
         [options]="status">
       </app-dropdown-input>
       <app-text-input
