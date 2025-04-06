@@ -1,27 +1,19 @@
 <!-- filters -->
-
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-    <ul
-      role="list"
-      class="grid grid-cols-3 gap-x-6 gap-y-8 lg:grid-cols-4 xl:gap-x-8"
-    >
+    <ul role="list" class="grid grid-cols-3 gap-x-6 gap-y-8 lg:grid-cols-4 xl:gap-x-8">
       <li class="overflow-hidden">
         <div>
-          <label
-            for="location"
-            class="block text-sm/6 font-medium text-gray-900"
-            >Attorney</label
-          >
+          <label for="location" class="block text-sm/6 font-medium text-gray-900">File Status</label>
           <div class="mt-2 grid grid-cols-1">
             <select
               id="location"
               name="location"
               class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
             >
-            <span *ngFor="let attorney of attorneys">
-              <option class="text-sm font-normal">{{attorney}}</option>
-            </span>
+              <span *ngFor="let attorney of attorneys">
+                <option class="text-sm font-normal">{{attorney}}</option>
+              </span>
             </select>
             <svg
               class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
@@ -41,20 +33,16 @@
       </li>
       <li class="overflow-hidden">
         <div>
-          <label
-            for="location"
-            class="block text-sm/6 font-medium text-gray-900"
-            >File Type</label
-          >
+          <label for="location" class="block text-sm/6 font-medium text-gray-900">File Type</label>
           <div class="mt-2 grid grid-cols-1">
             <select
               id="location"
               name="location"
               class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
             >
-              <option>United States</option>
-              <option selected>All Selections</option>
-              <option>Mexico</option>
+              <option>Discovery</option>
+              <option selected>Watching Briefs</option>
+              <option>Other</option>
             </select>
             <svg
               class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
@@ -76,296 +64,25 @@
     </ul>
     <div class="mt-8">
       <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-        <div
-          class="overflow-hidden rounded-lg text-gray-200 px-4 py-5 border border-gray-200"
-        >
-          <dt class="truncate text-sm font-medium text-gray-500">
-            Total Files
-          </dt>
-          <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            {{metricsData.totalFiles}}
-          </dd>
+        <div class="overflow-hidden rounded-lg text-gray-200 px-4 py-5 border border-gray-200">
+          <dt class="truncate text-sm font-medium text-gray-500">Total Files</dt>
+          <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{metricsData.totalFiles}}</dd>
         </div>
-        <div
-          class="overflow-hidden rounded-lg bg-white px-4 py-5 border border-gray-200"
-        >
-          <dt class="truncate text-sm font-medium text-gray-500">
-            Perscribing Next 30 Days
-          </dt>
-          <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            {{metricsData.perscribingFileCount}}
-          </dd>
+        <div class="overflow-hidden rounded-lg bg-white px-4 py-5 border border-gray-200">
+          <dt class="truncate text-sm font-medium text-gray-500">Perscribing Next 30 Days</dt>
+          <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{metricsData.perscribingFileCount}}</dd>
         </div>
-        <div
-          class="overflow-hidden rounded-lg bg-white px-4 py-5 border border-gray-200"
-        >
-          <dt class="truncate text-sm font-medium text-gray-500">
-            Files Awaiting Trial
-          </dt>
-          <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            24.57%
-          </dd>
+        <div class="overflow-hidden rounded-lg bg-white px-4 py-5 border border-gray-200">
+          <dt class="truncate text-sm font-medium text-gray-500">Files Awaiting Trial</dt>
+          <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">0</dd>
         </div>
       </dl>
     </div>
 
-    <ul
-      role="list"
-      class="mt-8 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2 xl:gap-x-8"
-    >
-      <li class="overflow-hidden rounded-xl border border-gray-200 h-96">
-        <app-line-chart></app-line-chart>
-      </li>
-      <li class="overflow-hidden rounded-xl border border-gray-200 h-96">
+    <ul role="list" class="mt-8 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-1 xl:gap-x-8">
+      <li class="overflow-hidden rounded-xl border border-gray-200 h-[calc(100vh-20rem)]">
         <app-bar-chart></app-bar-chart>
       </li>
     </ul>
-
-    <div
-      class="mt-8 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8"
-    >
-      <div class="lg:col-span-2">
-        <div class="sm:flex sm:items-center">
-          <div class="sm:flex-auto">
-            <h1 class="text-base font-semibold text-gray-900">Perscribing files</h1>
-          </div>
-        </div>
-        <div class="mt-8 flow-root">
-          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div
-              class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-            >
-              <table class="min-w-full divide-y divide-gray-300">
-                <thead>
-                  <tr>
-                    <th
-                      scope="col"
-                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                    >
-                      File Reference
-                    </th>
-                    <th
-                      scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Attorney
-                    </th>
-                    <th
-                      scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Perscription date
-                    </th>
-                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                      <span class="sr-only">Edit</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
-                  <tr>
-                    <td
-                      class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                    >
-                      F34/6
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      WBS
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      03-12-2024
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                    >
-                      F15/23
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      YSR
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      15-12-2024
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                    >
-                      F65/101
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      YSR
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      18-12-2024
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                    >
-                      F45/12
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      LB
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                    03-01-2025
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                    >
-                      F45/23
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      YSR
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      08-01-2025
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                    >
-                      F78/89
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      AB
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    >
-                      09-01-2025
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="lg:col-span-1">
-        <div class="lg:col-span-2">
-          <div class="sm:flex sm:items-center">
-            <div class="sm:flex-auto">
-              <h1 class="text-base font-semibold text-gray-900">
-                File Count by Status
-              </h1>
-            </div>
-          </div>
-          <div class="mt-8 flow-root">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div
-                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-              >
-                <table class="min-w-full divide-y divide-gray-300">
-                  <thead>
-                    <tr>
-                      <th
-                        scope="col"
-                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                      >
-                        Rank
-                      </th>
-                      <th
-                        scope="col"
-                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                      >
-                        Status
-                      </th>
-                      <th
-                        scope="col"
-                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      >
-                        File Count
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-gray-200">
-                    <tr>
-                      <td
-                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                      >
-                        🏆
-                      </td>
-                      <td
-                        class="whitespace-nowrap py-4 text-sm text-gray-500"
-                      >
-                        WBS
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      >
-                        32
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                      >
-                      🥈
-                      </td>
-                      <td
-                        class="whitespace-nowrap py-4 text-sm text-gray-500 pr-3"
-                      >
-                        AB
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      >
-                        22
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                      >
-                      🥉
-                      </td>
-                      <td
-                        class="whitespace-nowrap py-4 text-sm text-gray-500"
-                      >
-                        LB
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      >
-                        20
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ import { UserService } from '../_services/user.service';
 import { CommonModule } from '@angular/common';
 import { Metrics } from '../_models/metrics.model';
 import { LegalFile } from '../_models/legalFile.model';
+import { Attorney } from '../_models/attorney.model';
 
 @Component({
   selector: 'app-analytics',
@@ -42,8 +43,8 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getAttorneys() {
-    this.userService.getAttorneys().subscribe((attorneys: string[]) => {
-      this.attorneys = attorneys;
+    this.userService.getAttorneys().subscribe((attorneys: Attorney[]) => {
+      this.attorneys = attorneys.map(attorney => attorney.userName);
     });
   }
 

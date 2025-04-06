@@ -6,6 +6,7 @@ import { LegalFileService } from '../../_services/legal-file.service';
 import { UserService } from '../../_services/user.service';
 import { LegalFile } from '../../_models/legalFile.model';
 import { DateFormatDirective } from '../../_directives/date-format.directive';
+import { Attorney } from '../../_models/attorney.model';
 
 @Component({
   selector: 'app-file-update',
@@ -60,8 +61,8 @@ export class FileUpdateComponent {
   }
 
   getAttorneys() {
-    this.userService.getAttorneys().subscribe((attorneys: string[]) => {
-      this.attorneys = attorneys;
+    this.userService.getAttorneys().subscribe((attorneys: Attorney[]) => {
+      this.attorneys = attorneys.map(attorney => attorney.userName);
     });
   }
 

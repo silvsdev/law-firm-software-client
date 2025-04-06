@@ -30,27 +30,43 @@ export class LegalFileService {
     this.legalFileParams.set(new LegalFileParams());
   }
 
-  getLegalFiles() {
+  getLegalFiles(append: boolean = false) {
     const response = this.legalFileCache.get(Object.values(this.legalFileParams()).join('-'));
 
     if (response) return setPaginatedResponse(response, this.paginatedResult);
 
     let params = setPaginationHeaders(this.legalFileParams().pageNumber, this.legalFileParams().pageSize);
 
-    params = params.append('minAge', this.legalFileParams().fileReference);
-    params = params.append('attorney', this.legalFileParams().attorney);
+    params = params.append('fileReference', this.legalFileParams().fileReference);
     params = params.append('dateOfAccident', this.legalFileParams().dateOfAccident);
     params = params.append('dateOfInstruction', this.legalFileParams().dateOfInstruction);
     params = params.append('status', this.legalFileParams().status);
     params = params.append('prescriptionDate', this.legalFileParams().prescriptionDate);
+    params = params.append('searchTerm', this.legalFileParams().searchTerm);
 
-    return this.http.get<LegalFile[]>(this.baseUrl, {observe: 'response', params}).subscribe({
+    // Append attorneys array as individual query parameters
+    this.legalFileParams().attorney.forEach(attorneyId => {
+      params = params.append('attorneys', attorneyId.toString());
+    });
+
+    return this.http.get<LegalFile[]>(this.baseUrl, { observe: 'response', params }).subscribe({
       next: response => {
-        setPaginatedResponse(response, this.paginatedResult);
+        if (append && this.paginatedResult()?.items) {
+          const currentItems = this.paginatedResult()?.items || [];
+          const newItems = response.body || [];
+          this.paginatedResult.set({
+            ...this.paginatedResult(),
+            items: [...currentItems, ...newItems]
+          });
+        } else {
+          setPaginatedResponse(response, this.paginatedResult);
+        }
         this.legalFileCache.set(Object.values(this.legalFileParams()).join('-'), response);
       }
-    })
+    });
   }
+
+ 
 
   getLegalFilesForDisbursements() {
     const response = this.legalFileCache.get(Object.values(this.legalFileParams()).join('-') + '-get-legal-files-for-disbursements');
@@ -60,7 +76,9 @@ export class LegalFileService {
     let params = setPaginationHeaders(this.legalFileParams().pageNumber, this.legalFileParams().pageSize);
 
     params = params.append('minAge', this.legalFileParams().fileReference);
-    params = params.append('attorney', this.legalFileParams().attorney);
+    if (this.legalFileParams().attorney.length > 0) {
+      params = params.append('attorney', this.legalFileParams().attorney.join(','));
+    }
     params = params.append('dateOfAccident', this.legalFileParams().dateOfAccident);
     params = params.append('dateOfInstruction', this.legalFileParams().dateOfInstruction);
     params = params.append('status', this.legalFileParams().status);

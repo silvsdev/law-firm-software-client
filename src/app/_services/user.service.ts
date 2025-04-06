@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { User, UserWithPassword, UserWithRoles } from '../_models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from './notification.service';
+import { Attorney } from '../_models/attorney.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class UserService {
   }
 
   getAttorneys() {
-    return this.http.get<string[]>(this.baseUrl + '/attorneys');
+    return this.http.get<Attorney[]>(this.baseUrl + '/attorneys');
   }
 
   updateUser(user: UserWithRoles) {

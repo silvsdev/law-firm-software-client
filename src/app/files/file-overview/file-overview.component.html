@@ -9,9 +9,7 @@
         <div class="flex items-center gap-4">
           <!-- Search Box -->
           <div class="relative w-96">
-            <div
-              class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-            >
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               <!-- Replace with your search icon SVG -->
               <svg
                 class="h-5 w-5 text-gray-400"
@@ -30,7 +28,8 @@
             <input
               type="text"
               placeholder="Search files..."
-              class="block w-full rounded-md border-0 py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-0 py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-600 sm:text-sm sm:leading-6"
+              (input)="onSearchTermChange($event)"
             />
           </div>
 
@@ -38,11 +37,11 @@
           <div class="relative">
             <button
               type="button"
-              class="relative w-40 rounded-md bg-white px-3 py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              class="relative w-40 rounded-md bg-white px-3 py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-600 sm:text-sm sm:leading-6"
+              (click)="toggleDropdown()"
             >
               <span class="flex items-center justify-between">
-                <span>Sort by name</span>
-                <!-- Replace with your chevron icon SVG -->
+                <span>Filter by Attorney</span>
                 <svg
                   class="h-5 w-5 text-gray-400"
                   viewBox="0 0 20 20"
@@ -56,6 +55,30 @@
                 </svg>
               </span>
             </button>
+
+            <div
+              *ngIf="dropdownOpen"
+              class="absolute mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabindex="-1"
+            >
+              <div class="py-1 px-2" role="none">
+                <ng-container *ngFor="let attorney of attorneys">
+                  <label class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <input
+                      type="checkbox"
+                      [value]="attorney.id"
+                      [checked]="selectedAttorneys.has(attorney.id)"
+                      (change)="onAttorneyChange($event)"
+                      class="mr-2"
+                    />
+                    {{ attorney.userName }}
+                  </label>
+                </ng-container>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -88,13 +111,7 @@
                   scope="col"
                   class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                 >
-                  Client Reference
-                </th>
-                <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  File Type
+                  Client Name
                 </th>
                 <th
                   scope="col"
@@ -102,6 +119,13 @@
                 >
                   Attorney
                 </th>
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  File Type
+                </th>
+
                 <th
                   scope="col"
                   class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -142,13 +166,13 @@
                   {{ legalFile.fileReference }}
                 </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {{ legalFile.clientReference }}
-                </td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {{ legalFile.fileType }}
+                  {{ legalFile.fullName }}
                 </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                   {{ legalFile.ownerId }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ legalFile.fileType }}
                 </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                   {{ legalFile.status }}

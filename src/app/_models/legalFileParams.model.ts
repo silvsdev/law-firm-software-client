@@ -2,9 +2,10 @@ export class LegalFileParams {
   pageNumber = 1;
   pageSize = 30;
   fileReference = '';
-  attorney = '';
+  attorney: number[] = [];
   status = '';
   dateOfInstruction = '';
   dateOfAccident = '';
   prescriptionDate = '';
+  searchTerm = '';
 }
