@@ -24,7 +24,7 @@ export class LegalFileService {
   paginatedResult = signal<PaginatedResult<LegalFile[]> | null>(null);
   paginatedResultForDisbursements = signal<PaginatedResult<LegalFileForDisbursement[]> | null>(null);
   legalFileCache = new Map();
-  legalFileParams =  signal<LegalFileParams>(new LegalFileParams());
+  legalFileParams = signal<LegalFileParams>(new LegalFileParams());
 
   resetLegalFileParams() {
     this.legalFileParams.set(new LegalFileParams());
@@ -62,11 +62,12 @@ export class LegalFileService {
           setPaginatedResponse(response, this.paginatedResult);
         }
         this.legalFileCache.set(Object.values(this.legalFileParams()).join('-'), response);
+      },
+      error: error => {
+        this.notificationService.notifyOnError('Failed to load files');
       }
     });
   }
-
- 
 
   getLegalFilesForDisbursements() {
     const response = this.legalFileCache.get(Object.values(this.legalFileParams()).join('-') + '-get-legal-files-for-disbursements');
@@ -88,6 +89,9 @@ export class LegalFileService {
       next: response => {
         setPaginatedResponse(response, this.paginatedResultForDisbursements);
         this.legalFileCache.set(Object.values(this.legalFileParams()).join('-') + '-get-legal-files-for-disbursements', response);
+      },
+      error: error => {
+        this.notificationService.notifyOnError('Failed to load disbursement files');
       }
     });
   }
@@ -100,6 +104,9 @@ export class LegalFileService {
         this.notificationService.notifyOnSuccess(
           'File created successfully'
         );
+      },
+      error: error => {
+        this.notificationService.notifyOnError('Failed to create file');
       }
     });
   }
@@ -112,6 +119,9 @@ export class LegalFileService {
           'File updated successfully'
         );
         this.getLegalFiles();
+      },
+      error: error => {
+        this.notificationService.notifyOnError('Failed to update file');
       }
     });
   }
@@ -124,6 +134,9 @@ export class LegalFileService {
         this.notificationService.notifyOnSuccess(
           'File deleted successfully'
         );
+      },
+      error: error => {
+        this.notificationService.notifyOnError('Failed to delete file');
       }
     });
   }
