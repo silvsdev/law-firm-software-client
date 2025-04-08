@@ -1,31 +1,77 @@
 <div>
-  <div class="md:flex md:items-center md:justify-between">
+  <div class="md:flex md:items-center md:justify-between mb-8">
     <div class="min-w-0 flex-1">
       <h2 class="font-bold text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight">{{ greeting }}, {{userName}} {{emoji}}</h2>
     </div>
   </div>
 
-  <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
     <!-- Leads Card -->
-    <a href="/leads" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Leads</h5>
-      <p class="font-normal text-gray-700">Manage your leads and track their status.</p>
+    <a href="/leads" class="group block h-full overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+      <div class="h-48 overflow-hidden bg-gray-200">
+        <img
+          src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80"
+          alt="Leads illustration"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between">
+          <h5 class="text-xl font-bold text-gray-900">Leads</h5>
+        </div>
+        <p class="mt-3 text-gray-600">Manage your leads and track their status.</p>
+      </div>
     </a>
 
     <!-- Users Card -->
-    <a href="/users" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Users</h5>
-      <p class="font-normal text-gray-700">View and manage user accounts.</p>
+    <a href="/users" class="group block h-full overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+      <div class="h-48 overflow-hidden bg-gray-200">
+        <img
+          src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80"
+          alt="Users illustration"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between">
+          <h5 class="text-xl font-bold text-gray-900">Users</h5>
+        </div>
+        <p class="mt-3 text-gray-600">View and manage user accounts.</p>
+      </div>
     </a>
 
-    <a href="/disbursements" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Disbursements</h5>
-      <p class="font-normal text-gray-700">View files and create disbursements</p>
+    <!-- Disbursements Card -->
+    <a href="/disbursements" class="group block h-full overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+      <div class="h-48 overflow-hidden bg-gray-200">
+        <img
+          src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80"
+          alt="Disbursements illustration"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between">
+          <h5 class="text-xl font-bold text-gray-900">Disbursements</h5>
+        </div>
+        <p class="mt-3 text-gray-600">View files and create disbursements.</p>
+      </div>
     </a>
 
-    <a href="/files" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Files</h5>
-      <p class="font-normal text-gray-700">View and update files</p>
+    <!-- Files Card -->
+    <a href="/files" class="group block h-full overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+      <div class="h-48 overflow-hidden bg-gray-200">
+        <img
+          src="https://images.unsplash.com/photo-1586281380117-5a60ae2050cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80"
+          alt="Files illustration"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between">
+          <h5 class="text-xl font-bold text-gray-900">Files</h5>
+        </div>
+        <p class="mt-3 text-gray-600">View and update files.</p>
+      </div>
     </a>
   </div>
 </div>
