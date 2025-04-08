@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, HostListener } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlideOverComponent } from '../../_shared/slide-over/slide-over.component';
 import { FileCreateComponent } from '../file-create/file-create.component';
@@ -24,10 +24,16 @@ import { Attorney } from '../../_models/attorney.model';
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.css'
 })
-export class FileOverviewComponent implements OnInit {
+export class FileOverviewComponent implements OnInit, OnDestroy {
   // Services
   public legalFileService = inject(LegalFileService);
   public userService = inject(UserService);
+
+  // Add this property to the FileOverviewComponent class
+  private isLoadingMore = false;
+  private observer: IntersectionObserver | null = null;
+  // Add this property to the FileOverviewComponent class
+private searchDebounceTimeout: any = null;
 
   // UI state
   registerMode = false;
@@ -49,6 +55,72 @@ export class FileOverviewComponent implements OnInit {
 
     // Add a click handler to close dropdowns when clicking outside
     document.addEventListener('click', this.handleOutsideClick.bind(this));
+
+    // Set up intersection observer for infinite scrolling
+    this.setupInfiniteScroll();
+  }
+
+  ngOnDestroy(): void {
+    // Clean up the observer
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
+    // Remove document event listener
+    document.removeEventListener('click', this.handleOutsideClick.bind(this));
+
+    // Remove sentinel element if it exists
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (sentinel) {
+      sentinel.remove();
+    }
+
+    // Clear any pending search debounce
+    if (this.searchDebounceTimeout) {
+      clearTimeout(this.searchDebounceTimeout);
+    }
+  }
+
+  // Set up infinite scroll with Intersection Observer
+  private setupInfiniteScroll(): void {
+    // Create a sentinel element that we'll observe
+    const sentinel = document.createElement('div');
+    sentinel.id = 'scroll-sentinel';
+    sentinel.style.height = '10px';
+    sentinel.style.width = '100%';
+
+    // Add it to the DOM - find the table container and append after it
+    setTimeout(() => {
+      const tableContainer = document.querySelector('.inline-block.min-w-full');
+      if (tableContainer && tableContainer.parentNode) {
+        tableContainer.parentNode.appendChild(sentinel);
+
+        // Create and setup the observer
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !this.isLoadingMore) {
+              this.isLoadingMore = true;
+
+              setTimeout(() => {
+                this.loadMoreFiles();
+                setTimeout(() => {
+                  this.isLoadingMore = false;
+                }, 500);
+              }, 100);
+            }
+          });
+        }, {
+          root: null, // viewport
+          rootMargin: '0px 0px 100px 0px', // 100px bottom margin
+          threshold: 0.1 // trigger when 10% visible
+        });
+
+        // Start observing
+        this.observer.observe(sentinel);
+      } else {
+        console.error('Could not find table container to append sentinel');
+      }
+    }, 500); // Give the DOM time to render
   }
 
   // Handler for clicks outside any dropdown
@@ -124,14 +196,26 @@ export class FileOverviewComponent implements OnInit {
     this.legalFileService.getLegalFiles();
   }
 
-  onSearchTermChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.legalFileService.legalFileParams.update(params => {
-      params.searchTerm = input.value;
-      return params;
-    });
-    this.legalFileService.getLegalFiles();
+  // Modify the onSearchTermChange method to handle typing and backspacing better
+onSearchTermChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+
+  // Reset the page number to 1 whenever the search term changes
+  this.legalFileService.legalFileParams.update(params => {
+    params.searchTerm = input.value;
+    params.pageNumber = 1; // Reset to first page on new search
+    return params;
+  });
+
+  // Debounce the search to prevent too many API calls while typing
+  if (this.searchDebounceTimeout) {
+    clearTimeout(this.searchDebounceTimeout);
   }
+
+  this.searchDebounceTimeout = setTimeout(() => {
+    this.legalFileService.getLegalFiles();
+  }, 300); // Wait 300ms after typing stops before searching
+}
 
   // UI action methods
   addFile() {
@@ -156,16 +240,5 @@ export class FileOverviewComponent implements OnInit {
   cancelEditMode(event: boolean) {
     this.editMode = event;
     this.registerMode = event;
-  }
-
-  // Scroll event for infinite loading
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    const max = document.documentElement.scrollHeight;
-
-    if (pos >= max) {
-      this.loadMoreFiles();
-    }
   }
 }
