@@ -1,7 +1,7 @@
-<div class="px-4 sm:px-6 lg:px-40">
+<div>
   <div class="sm:flex-auto">
     <div class="min-w-0 flex-1">
-      <h1 class="text-2xl font-semibold text-gray-900">Files</h1>
+      <h1 class="text-2xl font-semibold text-gray-900">Files 🗃️</h1>
     </div>
     <div class="min-w-0 flex-1 pt-4">
       <div class="sm:flex sm:items-center sm:justify-between">
@@ -87,7 +87,7 @@
           <button
             (click)="addFile()"
             type="button"
-            class="rounded-md bg-gray-600 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+            class="rounded-md bg-green-500 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
           >
             Create file
           </button>
@@ -123,32 +123,7 @@
                   scope="col"
                   class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                 >
-                  File Type
-                </th>
-
-                <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
                   Status
-                </th>
-                <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Date of Instruction
-                </th>
-                <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Date of Accident
-                </th>
-                <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Perscription date
                 </th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                   <span class="sr-only">Edit</span>
@@ -172,19 +147,7 @@
                   {{ legalFile.ownerId }}
                 </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {{ legalFile.fileType }}
-                </td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                   {{ legalFile.status }}
-                </td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {{ legalFile.dateOfInstruction }}
-                </td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {{ legalFile.dateOfAccident }}
-                </td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {{ legalFile.prescriptionDate }}
                 </td>
                 <td
                   class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
