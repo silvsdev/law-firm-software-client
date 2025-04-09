@@ -15,15 +15,13 @@ import { SlideOverComponent } from "../../_shared/slide-over/slide-over.componen
   styleUrl: './lead-overview.component.css'
 })
 export class LeadOverviewComponent {
-  leads = computed(() => this.leadService.Leads() || []);
+  leadService = inject(LeadService);
   statuses: string[] = ['New', 'Attorney Review', 'Qualified', 'Unqualified', 'Converted'];
   showModal = false;
   selectedLead: Lead | null = null;
   registerMode = false;
   editMode = false;
   panelTitle = 'Add new user';
-
-  constructor(private leadService: LeadService) {}
 
   ngOnInit(): void {
     this.leadService.getLeads();

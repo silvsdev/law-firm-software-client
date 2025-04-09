@@ -58,8 +58,7 @@
       <!-- Right side with create event button -->
       <div class="mt-4 sm:mt-0 flex justify-end">
         <button
-
-        (click)="addLead()"
+          (click)="addLead()"
           type="button"
           class="rounded-md bg-green-500 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
         >
@@ -114,8 +113,11 @@
               <th scope="col" class="w-10 py-3.5"></th>
             </tr>
           </thead>
+          <!-- Fix the conditional check and iteration to use Leads instead of result -->
+          @if (leadService.Leads()?.length) { @for(lead of leadService.Leads();
+          track lead.id) {
           <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let lead of leads(); trackBy: trackByLeadId">
+            <tr>
               <!-- Created Date - hidden on small screens, visible on md and up -->
               <td
                 class="hidden md:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm font-normal text-gray-900 sm:pl-0"
@@ -177,6 +179,16 @@
               </td>
             </tr>
           </tbody>
+          } } @else {
+          <!-- Add a no data message -->
+          <tbody>
+            <tr>
+              <td colspan="6" class="py-10 text-center text-gray-500">
+                <p>No leads found. Create one to get started.</p>
+              </td>
+            </tr>
+          </tbody>
+          }
         </table>
       </div>
     </div>
@@ -231,7 +243,9 @@
               </h3>
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  Are you ready to create a printable PDF of  <span class="font-semibold">{{ selectedLead?.name }}</span> information for the attorney's review??
+                  Are you ready to create a printable PDF of
+                  <span class="font-semibold">{{ selectedLead?.name }}</span>
+                  information for the attorney's review??
                 </p>
               </div>
             </div>
@@ -258,10 +272,7 @@
   </div>
 </div>
 
-
 <app-slide-over [panelTitle]="panelTitle" *ngIf="registerMode">
-  <app-lead-create
-    (cancelRegister)="cancelRegisterMode($event)">
+  <app-lead-create (cancelRegister)="cancelRegisterMode($event)">
   </app-lead-create>
-
 </app-slide-over>

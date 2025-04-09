@@ -80,6 +80,7 @@ export class LeadCreateComponent implements OnInit {
     };
 
     this.leadService.addLead(lead);
+    this.cancel();
   }
 
   cancel() {
