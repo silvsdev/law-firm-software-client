@@ -3,6 +3,8 @@ export interface LegalFileAdd {
   clientReference?: string;
   fullName: string;
   lastName?: string;
+  email?: string;
+  phone?: string;
   dateOfInstruction?: string;
   dateOfAccident?: string;
   status?: string;

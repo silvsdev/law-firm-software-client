@@ -23,6 +23,14 @@
         [formControl]="$any(fileEditForm.controls['lastName'])"
         [label]="'Last Name'"
       ></app-text-input>
+      <app-text-input
+        [formControl]="$any(fileEditForm.controls['phone'])"
+        [label]="'Phone'"
+      ></app-text-input>
+      <app-text-input
+        [formControl]="$any(fileEditForm.controls['email'])"
+        [label]="'Email'"
+      ></app-text-input>
       <app-dropdown-input
       [formControl]="$any(fileEditForm.controls['fileType'])"
       [label]="'File Type'"

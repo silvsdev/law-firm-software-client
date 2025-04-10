@@ -45,6 +45,8 @@ export class FileCreateComponent {
       clientReference: ['', Validators.required],
       fullName: ['', Validators.required],
       lastName: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       dateOfInstruction: ['', this.dateValidator],
       dateOfAccident: ['', this.dateValidator],
       status: ['', Validators.required],

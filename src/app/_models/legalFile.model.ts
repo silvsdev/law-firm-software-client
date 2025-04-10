@@ -4,6 +4,8 @@ export interface LegalFile {
   clientReference?: string;
   fullName?: string;
   lastName?: string;
+  email?: string;
+  phone?: string;
   prescriptionDate?: string;
   dateOfInstruction?: string;
   dateOfAccident?: string;
