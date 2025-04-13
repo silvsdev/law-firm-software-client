@@ -24,6 +24,8 @@ export class LeadCreateComponent implements OnInit {
 
   leadCreateForm: FormGroup = new FormGroup({});
 
+
+
   preferredContactMethodOptions = [
     'Email',
     'Phone'
@@ -37,8 +39,7 @@ export class LeadCreateComponent implements OnInit {
 
   sourceOptions = [
     'Phone',
-    'Email',
-    'Discovery'
+    'Email'
   ];
 
   constructor(
@@ -76,7 +77,26 @@ export class LeadCreateComponent implements OnInit {
       preferredContactMethod: this.leadCreateForm.get('preferredContactMethod')!.value,
       preferredLanguage: this.leadCreateForm.get('preferredLanguage')!.value,
       accidentDate: this.leadCreateForm.get('accidentDate')!.value,
-      source: this.leadCreateForm.get('source')!.value
+      source: this.leadCreateForm.get('source')!.value,
+      dateSent: 'NA',
+      natureOfInjury: 'NA',
+      accidentDescription: 'NA',
+      injuredMemberName: 'NA',
+      memberNumber: 'NA',
+      idNumberInjured: 'NA',
+      spouse: 'NA',
+      isPrincipleMember: 'NA',
+      residentialAddress: 'NA',
+      homeTelephone: 'NA',
+      workTelephone: 'NA',
+      cellPhoneNumber: 'NA',
+      emailAddress: 'NA',
+      spouseName: 'NA',
+      spouseContactNumber: 'NA',
+      principleName: 'NA',
+      principleHomeTel: 'NA',
+      principleWorkTel: 'NA',
+      principleCellTel: 'NA'
     };
 
     this.leadService.addLead(lead);

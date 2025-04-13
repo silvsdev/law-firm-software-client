@@ -1,0 +1,270 @@
+<form
+  [formGroup]="leadDiscoveryForm"
+  (ngSubmit)="leadDiscoveryForm.valid && onSubmit()"
+  autocomplete="off"
+>
+  <div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base/7 font-semibold text-gray-900">
+        Discovery Discovery Lead Form
+      </h2>
+      <p class="mt-1 text-sm/6 text-gray-600">
+        This form is used to add leads provided by Discovery
+      </p>
+    </div>
+
+    <div>
+      <div class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-base/7 font-semibold text-gray-90">
+              Incident Details
+            </h3>
+            <p class="mt-1 text-sm/6 text-gray-600">
+              Information about the incident.
+            </p>
+          </div>
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['discovery-lead-id'])
+                "
+                [label]="'Lead ID'"
+              ></app-text-input>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <app-text-input
+                  [formControl]="$any(leadDiscoveryForm.controls['date-sent'])"
+                  [label]="'Date Sent'"
+                  [type]="'date'"
+                ></app-text-input>
+              </div>
+              <div>
+                <app-text-input
+                  [formControl]="
+                    $any(leadDiscoveryForm.controls['date-accident'])
+                  "
+                  [label]="'Date of Accident'"
+                  [type]="'date'"
+                ></app-text-input>
+              </div>
+              <div class="md:col-span-3">
+
+                <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['nature-injury'])
+                "
+                [label]="'Nature of Injury'"
+              ></app-text-input>
+              </div>
+              <div class="md:col-span-3">
+
+                <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['accident-description'])
+                "
+                [label]="'Description of Accident'"
+              ></app-text-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-8 border-gray-200" />
+
+      <div class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-base/7 font-semibold text-gray-90">
+              Injured Member
+            </h3>
+            <p class="mt-1 text-sm/6 text-gray-600">
+              Details about the member involved in the accident.
+            </p>
+          </div>
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['injured-member-name'])
+                "
+                [label]="'Name'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['member-number'])
+                "
+                [label]="'Member Number'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['id-number-injured'])
+                "
+                [label]="'ID Number'"
+              ></app-text-input>
+
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['residential-address'])
+                "
+                [label]="'Residential Address'"
+              ></app-text-input>
+            </div>
+            <div class="grid-cols-1 md:grid-cols-3 gap-4">
+              <app-dropdown-input
+                [formControl]="$any(leadDiscoveryForm.controls['spouse'])"
+                [label]="': Does the injured member have a spouse?'"
+                [options]="isPrincipleMember"
+              ></app-dropdown-input>
+
+              <!-- add is principle member dropdown -->
+              <app-dropdown-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['is-principle-member'])
+                "
+                [label]="': Is the injured member the principle member?'"
+                [options]="isPrincipleMember"
+              ></app-dropdown-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-8 border-gray-200" />
+
+      <div class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-base/7 font-semibold text-gray-90">
+              Contact Information
+            </h3>
+            <p class="mt-1 text-sm/6 text-gray-600">
+              Contact details for the member and principle member.
+            </p>
+          </div>
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['home-telephone'])
+                "
+                [label]="'Home Telephone'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['work-telephone'])
+                "
+                [label]="'Work Telephone'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['cell-phone-number'])
+                "
+                [label]="'Cell Phone Number'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['email-address'])
+                "
+                [label]="'Email Address'"
+              ></app-text-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-8 border-gray-200" *ngIf="leadDiscoveryForm.get('spouse')?.value === 'Yes'" />
+
+      <div class="mb-12" *ngIf="leadDiscoveryForm.get('spouse')?.value === 'Yes'">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-base/7 font-semibold text-gray-90">
+              Spouse Contact Information
+            </h3>
+            <p class="mt-1 text-sm/6 text-gray-600">
+              Contact details for the spouse.
+            </p>
+          </div>
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <app-text-input
+                [formControl]="$any(leadDiscoveryForm.controls['spouse-name'])"
+                [label]="'Name'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['spouse-contact-number'])
+                "
+                [label]="'Contact Number'"
+              ></app-text-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-8 border-gray-200" *ngIf="leadDiscoveryForm.get('is-principle-member')?.value === 'No'" />
+
+      <div class="mb-12" *ngIf="leadDiscoveryForm.get('is-principle-member')?.value === 'No'">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-base/7 font-semibold text-gray-90">
+              Principle Member
+            </h3>
+            <p class="mt-1 text-sm/6 text-gray-600">
+              Details about the principle member.
+            </p>
+          </div>
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['principle-name'])
+                "
+                [label]="'Name'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['principle-home-tel'])
+                "
+                [label]="'Home Telephone'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['principle-work-tel'])
+                "
+                [label]="'Work Telephone'"
+              ></app-text-input>
+              <app-text-input
+                [formControl]="
+                  $any(leadDiscoveryForm.controls['principle-cell-tel'])
+                "
+                [label]="'Cell Phone Number'"
+              ></app-text-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-8 border-gray-200" />
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button
+      type="button"
+      class="text-sm/6 font-semibold text-gray-900"
+      (click)="cancel()"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >
+      Save
+    </button>
+  </div>
+</form>

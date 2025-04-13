@@ -9,6 +9,7 @@ import { authGuard } from './_guards/auth.guard';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { DisbursementOverviewComponent } from './disbursement/disbursement-overview/disbursement-overview.component';
 import { LeadOverviewComponent } from './leads/lead-overview/lead-overview.component';
+import { LeadDiscoveryComponent } from './leads/lead-discovery/lead-discovery.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,8 @@ export const routes: Routes = [
       { path: 'analytics', component: AnalyticsComponent },
       { path: 'disbursements', component: DisbursementOverviewComponent },
       { path: 'leads', component: LeadOverviewComponent },
+      { path: 'discovery-lead', component: LeadDiscoveryComponent},
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' } // default route
     ]
   },
   {

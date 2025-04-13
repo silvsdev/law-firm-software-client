@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { jsPDF } from 'jspdf';
 import { LeadCreateComponent } from "../lead-create/lead-create.component";
 import { SlideOverComponent } from "../../_shared/slide-over/slide-over.component";
+import { Router, RouterLink } from '@angular/router';
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-lead-overview',
@@ -15,6 +17,7 @@ import { SlideOverComponent } from "../../_shared/slide-over/slide-over.componen
   styleUrl: './lead-overview.component.css'
 })
 export class LeadOverviewComponent {
+  router = inject(Router);
   leadService = inject(LeadService);
   statuses: string[] = ['New', 'Attorney Review', 'Qualified', 'Unqualified', 'Converted'];
   showModal = false;
@@ -22,9 +25,14 @@ export class LeadOverviewComponent {
   registerMode = false;
   editMode = false;
   panelTitle = 'Add new user';
+  isDropdownOpen = false;
 
   ngOnInit(): void {
     this.leadService.getLeads();
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   trackByLeadId(index: number, lead: Lead): number {
@@ -133,6 +141,11 @@ export class LeadOverviewComponent {
     this.panelTitle = 'Add new lead';
     this.editMode = false;
     this.registerMode = true;
+  }
+
+  addDiscoveryLead(){
+    this.router.navigate(["/discovery-lead"]);
+
   }
 
   cancelRegisterMode(event: boolean) {
