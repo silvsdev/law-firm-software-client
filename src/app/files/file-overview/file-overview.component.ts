@@ -232,6 +232,8 @@ onSearchTermChange(event: Event) {
     this.openDropdownId = null; // Close the dropdown after selecting edit
   }
 
+  viewFile(file: LegalFile) {}
+
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
     this.editMode = event;

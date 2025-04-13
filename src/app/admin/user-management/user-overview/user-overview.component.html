@@ -4,13 +4,9 @@
   </div>
   <div class="min-w-0 flex-1 pt-4">
     <div class="sm:flex sm:items-center sm:justify-between">
-      <!-- Left side with title, search, and sort dropdown -->
       <div class="flex items-center gap-4">
-
-        <!-- Search Box -->
         <div class="relative w-96">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <!-- Replace with your search icon SVG -->
             <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -21,15 +17,10 @@
             class="block w-full rounded-md border-0 py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
-
-        <!-- Sort Dropdown -->
-        
-      </div>
-
-      <!-- Right side with create event button -->
-      <div class="mt-4 sm:mt-0 flex justify-end">
+        </div>
+      <div class="mt-4 sm:mt-0 flex justify-end sm:block hidden">
         <button
-        (click)="addUser()"
+          (click)="addUser()"
           type="button"
           class="rounded-md bg-green-500 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
         >
@@ -39,102 +30,60 @@
     </div>
   </div>
 
-    <div class="mt-8 flow-root">
-      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-          <table class="min-w-full divide-y divide-gray-300">
-            <thead>
-              <tr>
-                <th
-                  scope="col"
-                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                >
-                  Name
-                </th>
-                <th
-                scope="col"
-                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-              >
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead>
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                File Reference
+              </th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                 Full Name
               </th>
-              <th
-              scope="col"
-              class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-            >
-              Last Name
-            </th>
-
-                <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Email
-                </th>
-                <!-- <th
-                  scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Role
-                </th> -->
-                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                  <span class="sr-only">Edit</span>
-                </th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 hidden sm:table-cell">
+                Last Name
+              </th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden sm:table-cell">
+                Email
+              </th>
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0 hidden sm:table-cell">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          @for(user of userService.users(); track user.knownAs){
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                  {{user.knownAs}}
+                </td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                  {{user.fullName}}
+                </td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 hidden sm:table-cell">
+                  {{user.lastName}}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden sm:table-cell">
+                  {{user.email}}
+                </td>
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 hidden sm:table-cell">
+                  <button
+                    type="button"
+                    (click)="editUser(user)"
+                    class="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer"
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
-            </thead>
-            @for(user of userService.users(); track user.knownAs){
-              <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                  >
-                    {{user.knownAs}}
-                  </td>
-                  <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                  >
-                    {{user.fullName}}
-                  </td>
-                  <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
-                  >
-                    {{user.lastName}}
-                  </td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {{user.email}}
-                  </td>
-                  <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <span *ngIf="user.roles">
-                      <span *ngFor="let role of user.roles| keyvalue">
-                        <span
-                          *ngIf="role.value"
-                          class="inline-flex items-center rounded-full bg-white-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-blue-700/10"
-                          >
-                          {{ role.key | titlecase }} </span
-                        >
-                      </span>
-                    </span>
-                  </td> -->
-                  <td
-                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
-                  >
-                    <button
-                      type="button"
-                      (click)="editUser(user)"
-                      class="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            }
-          </table>
-        </div>
+            </tbody>
+          }
+        </table>
       </div>
     </div>
-
-
-
+  </div>
 </div>
 
 <app-slide-over [panelTitle]="panelTitle" *ngIf="registerMode">
