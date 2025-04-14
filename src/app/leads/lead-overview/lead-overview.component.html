@@ -201,12 +201,12 @@
                   </select>
                 </div>
               </td>
-              <!-- Green dot column - smaller width -->
               <td
                 class="relative whitespace-nowrap py-4 pl-1 pr-1 text-right text-sm font-normal w-10"
               >
+                <!-- Show green dot for regular new leads -->
                 <span
-                  *ngIf="lead.status === 'New'"
+                  *ngIf="lead.status === 'New' && lead.source !== 'Discovery'"
                   class="relative flex h-3 w-3"
                 >
                   <span
@@ -214,6 +214,19 @@
                   ></span>
                   <span
                     class="relative inline-flex h-3 w-3 rounded-full bg-green-500"
+                  ></span>
+                </span>
+
+                <!-- Show blue dot for discovery new leads -->
+                <span
+                  *ngIf=" lead.source === 'Discovery'"
+                  class="relative flex h-3 w-3"
+                >
+                  <span
+                    class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex h-3 w-3 rounded-full bg-blue-500"
                   ></span>
                 </span>
               </td>
