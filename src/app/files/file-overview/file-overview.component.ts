@@ -9,6 +9,7 @@ import { LegalFileService } from '../../_services/legal-file.service';
 import { UserService } from '../../_services/user.service';
 import { LegalFile } from '../../_models/legalFile.model';
 import { Attorney } from '../../_models/attorney.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-overview',
@@ -18,8 +19,6 @@ import { Attorney } from '../../_models/attorney.model';
     SlideOverComponent,
     FileCreateComponent,
     FileUpdateComponent,
-    CheckboxInputComponent,
-    DropdownInputComponent
   ],
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.css'
@@ -28,6 +27,7 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
   // Services
   public legalFileService = inject(LegalFileService);
   public userService = inject(UserService);
+  public router = inject(Router);
 
   // Add this property to the FileOverviewComponent class
   private isLoadingMore = false;
@@ -232,7 +232,10 @@ onSearchTermChange(event: Event) {
     this.openDropdownId = null; // Close the dropdown after selecting edit
   }
 
-  viewFile(file: LegalFile) {}
+  viewFile(file: LegalFile) {
+    this.selectedFile = file;
+    this.router.navigate(['/legal-file-view-example']);
+  }
 
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
