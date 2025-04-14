@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LeadAdd } from '../../_models/LeadAdd.model';
@@ -6,15 +6,17 @@ import { CheckboxInputComponent } from '../../_shared/form-inputs/checkbox-input
 import { TextInputComponent } from '../../_shared/form-inputs/text-input/text-input.component';
 import { DropdownInputComponent } from '../../_shared/form-inputs/dropdown-input/dropdown-input.component';
 import { Router } from '@angular/router';
+import { LeadService } from '../../_services/lead.service';
 
 @Component({
   selector: 'app-lead-discovery',
   standalone: true,
-  imports: [TextInputComponent, CheckboxInputComponent, ReactiveFormsModule, CommonModule, DropdownInputComponent],
+  imports: [TextInputComponent, ReactiveFormsModule, CommonModule, DropdownInputComponent],
   templateUrl: './lead-discovery.component.html',
   styleUrl: './lead-discovery.component.css'
 })
 export class LeadDiscoveryComponent implements OnInit {
+  leadService = inject(LeadService);
   router = inject(Router);
   leadDiscoveryForm: FormGroup = new FormGroup({});
 
@@ -143,8 +145,12 @@ export class LeadDiscoveryComponent implements OnInit {
       source: 'Discovery'
     };
 
+    this.leadService.addLead(DiscoveryLead);
+    this.leadDiscoveryForm.reset();
+    this.leadDiscoveryForm.get('spouse')?.setValue('No');
+
     // You can call your service to save the lead here
-    console.log(DiscoveryLead);
+
   }
 
   cancel() {
@@ -154,7 +160,8 @@ export class LeadDiscoveryComponent implements OnInit {
   onSubmit() {
     if (this.leadDiscoveryForm.valid) {
       this.createLead();
-      console.log(this.leadDiscoveryForm.value);
+
+      this.cancel();
     } else {
       console.log('Form is invalid');
       // Mark all fields as touched to show validation errors
