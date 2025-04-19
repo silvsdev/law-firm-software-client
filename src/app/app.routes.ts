@@ -6,11 +6,14 @@ import { FileOverviewComponent } from './files/file-overview/file-overview.compo
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { authGuard } from './_guards/auth.guard';
-import { AnalyticsComponent } from './analytics/analytics.component';
+import { AnalyticsOverviewComponent } from './analytics/analytics-overview/analytics.component';
 import { DisbursementOverviewComponent } from './disbursement/disbursement-overview/disbursement-overview.component';
 import { LeadOverviewComponent } from './leads/lead-overview/lead-overview.component';
 import { LeadDiscoveryComponent } from './leads/lead-discovery/lead-discovery.component';
 import { FileViewComponent } from './files/file-view/file-view.component';
+import { ReportLayoutComponent } from './layouts/report-layout/report-layout.component';
+import { FileOverviewReportComponent } from './analytics/file-overview-report/file-overview-report.component';
+import { LeadOverviewReportComponent } from './analytics/leads-overview-report/leads-overview-report.component';
 
 export const routes: Routes = [
   {
@@ -22,7 +25,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'files', component: FileOverviewComponent },
       { path: 'users', component: UserOverviewComponent },
-      { path: 'analytics', component: AnalyticsComponent },
+      { path: 'analytics', component: AnalyticsOverviewComponent },
       { path: 'disbursements', component: DisbursementOverviewComponent },
       { path: 'leads', component: LeadOverviewComponent },
       { path: 'discovery-lead', component: LeadDiscoveryComponent},
@@ -37,5 +40,16 @@ export const routes: Routes = [
       { path: 'login', component: SignInComponent }
     ]
   },
-  { path: '**', redirectTo: 'auth/login' } // catch-all route
+  {
+    path: 'report',
+    component: ReportLayoutComponent,
+    children:[
+      {path: 'file-overview', component: FileOverviewReportComponent}, // Adjust the path as necessary
+      {path: 'lead-overview', component: LeadOverviewReportComponent} // Adjust the path as necessary
+    ]
+  },
+
+  // catch-all route
+  { path: '**', redirectTo: '/dashboard' }
+
 ];

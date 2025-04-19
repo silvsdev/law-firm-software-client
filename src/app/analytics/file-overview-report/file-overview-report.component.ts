@@ -1,23 +1,23 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CardComponent } from '../_shared/card/card.component';
-import { BarChartComponent } from "../_shared/bar-chart/bar-chart.component";
-import { LineChartComponent } from "../_shared/line-chart/line-chart.component";
-import { AnalyticsService } from '../_services/analytics.service';
-import { Analytics } from '../_models/analytics.model';
-import { UserService } from '../_services/user.service';
+import { CardComponent } from '../../_shared/card/card.component';
+import { BarChartComponent } from "../../_shared/bar-chart/bar-chart.component";
+import { LineChartComponent } from "../../_shared/line-chart/line-chart.component";
+import { AnalyticsService } from '../../_services/analytics.service';
+import { Analytics } from '../../_models/analytics.model';
+import { UserService } from '../../_services/user.service';
 import { CommonModule } from '@angular/common';
-import { Metrics } from '../_models/metrics.model';
-import { LegalFile } from '../_models/legalFile.model';
-import { Attorney } from '../_models/attorney.model';
+import { Metrics } from '../../_models/metrics.model';
+import { LegalFile } from '../../_models/legalFile.model';
+import { Attorney } from '../../_models/attorney.model';
 
 @Component({
-  selector: 'app-analytics',
+  selector: 'app-file-overview-report',
   standalone: true,
   imports: [CardComponent, BarChartComponent, LineChartComponent, CommonModule],
-  templateUrl: './analytics.component.html',
-  styleUrl: './analytics.component.css'
+  templateUrl: './file-overview-report.component.html',
+  styleUrl: './file-overview-report.component.css'
 })
-export class AnalyticsComponent implements OnInit {
+export class FileOverviewReportComponent implements OnInit {
   analyticsService = inject(AnalyticsService);
 
   public userService = inject(UserService);
