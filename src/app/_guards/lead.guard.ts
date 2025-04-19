@@ -3,12 +3,13 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { NotificationService } from '../_services/notification.service';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const leadGuard: CanActivateFn = (route, state) => {
   const accountService = inject(AccountService);
   const router = inject(Router);
   const notificationService = inject(NotificationService);
+  const roles = accountService.roles();
 
-  if (accountService.roles().includes('Admin')) {
+  if (roles.includes('Admin') || roles.includes('Marketing')) {
     return true;
   } else {
     notificationService.notifyOnError('You do not have permission to access this area');

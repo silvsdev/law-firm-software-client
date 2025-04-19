@@ -14,9 +14,11 @@ import { MenuDropdownDesktopNavComponent } from "../menu-dropdown-desktop-nav/me
 })
 export class DesktopNavComponent {
 
+  accountService = inject(AccountService);
+
   dropdownOpen = false;
 
-  private accountService = inject(AccountService)
+  // private accountService = inject(AccountService)
 
   logout() {
     this.accountService.logout();

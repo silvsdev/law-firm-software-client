@@ -1,19 +1,23 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+  accountService = inject(AccountService);
+
   emoji: string = '';
   greeting: string = '';
   userName: string | null = null;
 
-  constructor(private accountService: AccountService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.setGreeting();

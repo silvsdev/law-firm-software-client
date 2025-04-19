@@ -12,43 +12,61 @@ import { AnalyticsService } from '../../_services/analytics.service';
 })
 export class BarChartComponent implements OnInit {
   @Input() type: string = 'bar';
+  @Input() analyticsData?: Analytics;
 
   analyticsService = inject(AnalyticsService);
-  analyticsData: Analytics = {
-    data: [],
-    labels: []
-  }
-
-
   chart: any = [];
 
   constructor() {}
 
   ngOnInit(): void {
-    if(this.type === 'FileType') {
-
-    }
-    else {
-    this.getFileAssignments();
+    if (this.type === 'FileType') {
+      // Handle FileType specific logic
+    } else if (!this.analyticsData) {
+      // Only fetch data if it wasn't provided as an input
+      this.getFileAssignments();
+    } else {
+      // Use the provided data
+      this.renderChart();
     }
   }
 
   getFileAssignments() {
     this.analyticsService.getFileAssignments().subscribe({
       next: response => {
-        if (response.body) {
-          var chartId = 'canvass';
-          var label = '# of Active Files';
-          var labels = response.body?.labels;
-          var data = response.body?.data;
-          this.generateBarGraph(labels, data, chartId, label );
+        if (response) {
+          // Your service now returns the body directly, not wrapped in response.body
+          const chartId = 'canvass';
+          const label = '# of Active Files';
+          const labels = response?.labels || [];
+          const data = response?.data || [];
+          this.generateBarGraph(labels, data, chartId, label);
+        }
+      },
+      error: error => {
+        console.error('Error fetching file assignments for chart', error);
       }
-    },
-    })
+    });
   }
 
+  renderChart() {
+    if (this.analyticsData) {
+      const chartId = 'canvass';
+      const label = '# of Active Files';
+      this.generateBarGraph(
+        this.analyticsData.labels || [],
+        this.analyticsData.data || [],
+        chartId,
+        label
+      );
+    }
+  }
 
   generateBarGraph(labels: string[], data: number[], chartId: string, label: string) {
+    // Destroy existing chart if it exists
+    if (this.chart && this.chart.destroy) {
+      this.chart.destroy();
+    }
 
     this.chart = new Chart(chartId, {
       type: 'bar',
@@ -65,6 +83,7 @@ export class BarChartComponent implements OnInit {
         ],
       },
       options: {
+        responsive: true,
         scales: {
           y: {
             beginAtZero: true,
@@ -73,6 +92,4 @@ export class BarChartComponent implements OnInit {
       },
     });
   }
-
-
 }

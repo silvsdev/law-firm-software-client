@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { NotificationService } from '../_services/notification.service';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const userGuard: CanActivateFn = (route, state) => {
   const accountService = inject(AccountService);
   const router = inject(Router);
   const notificationService = inject(NotificationService);

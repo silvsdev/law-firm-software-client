@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-mobile-nav',
@@ -20,6 +21,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class MobileNavComponent {
   isMenuOpen = false;
+  accountService = inject(AccountService);
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
